@@ -40,24 +40,16 @@ class G2048:
             if type[0]>0:
                 if not self.right():
                     return
-                if self.merge(0):
-                    self.right()
             else:
                 if not self.left():
                     return
-                if self.merge(0):
-                    self.left()
         else:
             if type[1]>0:
                 if not self.down():
                     return
-                if self.merge(1):
-                    self.down()
             else:
                 if not self.up():
                     return
-                if self.merge(1):
-                    self.up()
         self.random_num()
         if self.is_print:
             self.print()
@@ -67,6 +59,11 @@ class G2048:
         ret = False
         for i in range(self.height):
             k = [n for n in self.set[i] if n!=0]
+            for j in range(len(k)-1):
+                if k[j] == k[j+1]:
+                    k[j] *= 2
+                    k[j+1] = 0
+            k = [n for n in k if n!=0]
             k += [0]*(self.width-len(k))
             if self.set[i] != k:
                 self.set[i] = k
@@ -78,12 +75,15 @@ class G2048:
         ret = False
         for i in range(self.height):
             k = [n for n in self.set[i] if n!=0]
+            for j in range(len(k)-1,0,-1):
+                if k[j] == k[j-1]:
+                    k[j] *= 2
+                    k[j-1] = 0
+            k = [n for n in k if n!=0]
             k = [0]*(self.width-len(k))+k
             if self.set[i] != k:
                 self.set[i] = k
                 ret = True
-        if(self.merge(0)):
-            self.right()
         return ret
 
     def up(self) -> bool:
@@ -91,13 +91,17 @@ class G2048:
         ret = False
         for j in range(self.width):
             k = [n[j] for n in self.set if n[j] != 0]
+            for i in range(len(k)-1):
+                if k[i] == k[i+1]:
+                    k[i] *= 2
+                    k[i+1] = 0
+            k = [n for n in k if n!=0]
             k += [0]*(self.height-len(k))
+            if k == [n[j] for n in self.set]:
+                continue
             for i in range(self.height):
-                if self.set[i][j] != k[i]:
-                    self.set[i][j] = k[i]
-                    ret = True
-        if(self.merge(1)):
-            self.up()
+                self.set[i][j] = k[i]
+            ret = True
         return ret
 
     def down(self) -> bool:
@@ -106,34 +110,16 @@ class G2048:
         for j in range(self.width):
             k = [n[j] for n in self.set if n[j] != 0]
             k = [0]*(self.height-len(k)) + k
+            for i in range(len(k)-1,0,-1):
+                if k[i] == k[i-1]:
+                    k[i] *= 2
+                    k[i-1] = 0
+            k = [n for n in k if n!=0]
+            if k == [n[j] for n in self.set]:
+                continue
             for i in range(self.height):
-                if self.set[i][j] != k[i]:
-                    self.set[i][j] = k[i]
-                    ret = True
-        if(self.merge(1)):
-            self.down()
-        return ret
-
-    def merge(self,type:int) -> bool:
-        ret = False
-        if type == 0:
-            for i in range(self.height):
-                for j in range(1,self.width):
-                    if self.set[i][j]==0:
-                        continue
-                    if self.set[i][j]==self.set[i][j-1]:
-                        self.set[i][j-1]*=2
-                        self.set[i][j]=0
-                        ret = True
-        elif type == 1:
-            for j in range(self.width):
-                for i in range(1,self.height):
-                    if self.set[i][j]==0:
-                        continue
-                    if self.set[i][j]==self.set[i-1][j]:
-                        self.set[i-1][j]*=2
-                        self.set[i][j]=0
-                        ret = True
+                self.set[i][j] = k[i]
+            ret = True
         return ret
 
 if __name__ == '__main__':
