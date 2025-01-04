@@ -36,20 +36,14 @@ class G2048:
             print(self.set[i])
 
     def move(self,type:tuple[RIGHT,DOWN]):
-        if type[0]:
-            if type[0]>0:
-                if not self.right():
-                    return
-            else:
-                if not self.left():
-                    return
-        else:
-            if type[1]>0:
-                if not self.down():
-                    return
-            else:
-                if not self.up():
-                    return
+        if type[0] > 0 and not self.right():
+            return
+        elif type[0] < 0 and not self.left():
+            return
+        elif type[1] > 0 and not self.down():
+            return
+        elif type[1] < 0 and not self.up():
+            return
         self.random_num()
         if self.is_print:
             self.print()
