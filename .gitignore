@@ -1,0 +1,35 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build output directories
+dist/
+build/
+
+# Ignore log files
+*.log
+
+# Ignore environment variable files
+.env
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE specific files
+.vscode/
+.vs/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore coverage reports
+coverage/
+
+# Ignore python cache files
+__pycache__/
+
+# Ignore python environment files
+.venv/
