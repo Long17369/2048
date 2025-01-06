@@ -25,7 +25,7 @@ class G2048:
         empty = [(i,j) for i in range(self.height) for j in range(self.width) if self.set[i][j]==0]
         if empty:
             i,j = random.choice(empty)
-            self.set[i][j] = random.choice([2,4])
+            self.set[i][j] = random.choice([1,1,1,1,1,1,1,1,1,2])
             return True
         else:
             return False
@@ -55,7 +55,7 @@ class G2048:
             k = [n for n in self.set[i] if n!=0]
             for j in range(len(k)-1):
                 if k[j] == k[j+1]:
-                    k[j] *= 2
+                    k[j] += 1
                     k[j+1] = 0
             k = [n for n in k if n!=0]
             k += [0]*(self.width-len(k))
@@ -71,7 +71,7 @@ class G2048:
             k = [n for n in self.set[i] if n!=0]
             for j in range(len(k)-1,0,-1):
                 if k[j] == k[j-1]:
-                    k[j] *= 2
+                    k[j] += 1
                     k[j-1] = 0
             k = [n for n in k if n!=0]
             k = [0]*(self.width-len(k))+k
@@ -87,7 +87,7 @@ class G2048:
             k = [n[j] for n in self.set if n[j] != 0]
             for i in range(len(k)-1):
                 if k[i] == k[i+1]:
-                    k[i] *= 2
+                    k[i] += 1
                     k[i+1] = 0
             k = [n for n in k if n!=0]
             k += [0]*(self.height-len(k))
@@ -106,9 +106,10 @@ class G2048:
             k = [0]*(self.height-len(k)) + k
             for i in range(len(k)-1,0,-1):
                 if k[i] == k[i-1]:
-                    k[i] *= 2
+                    k[i] += 1
                     k[i-1] = 0
             k = [n for n in k if n!=0]
+            k = [0]*(self.height-len(k)) + k
             if k == [n[j] for n in self.set]:
                 continue
             for i in range(self.height):
