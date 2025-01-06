@@ -20,6 +20,18 @@ class Game:
 
     def keyup(self,event:pygame.event.Event) -> None:
         """Handle key up event"""
+        if event.key in [pygame.K_UP,pygame.K_DOWN,pygame.K_LEFT,pygame.K_RIGHT]:
+            match event.key:
+                case pygame.K_UP:
+                    self.game.move((0,-1))
+                case pygame.K_DOWN:
+                    self.game.move((0,1))
+                case pygame.K_LEFT:
+                    self.game.move((-1,0))
+                case pygame.K_RIGHT:
+                    self.game.move((1,0))
+                case _:
+                    pass
         self.key[event.key] = False
 
     def mouse_down(self,event:pygame.event.Event) -> None:
