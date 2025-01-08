@@ -4,13 +4,13 @@
 
 ## Linux 使用方法
 
-### 安装
+### 安装(需要python 3.6 及以上版本)
 
 1. 克隆此仓库：
 
     ```sh
-    git clone <repository_url>
-    cd <repository_directory>
+    git clone https://github.com/Long17369/2048.git
+    cd 2048
     ```
 
 2. 创建并激活虚拟环境，并安装依赖项：
@@ -31,7 +31,7 @@ python main.py
 
 ## Windows 使用方法
 
-直接运行目录下 `run.bat` 即可(需要安装python 3.6及以上版本)
+下载源码后直接运行目录下 `run.bat` 即可(需要安装python 3.6及以上版本)
 
 ## 游戏玩法
 
