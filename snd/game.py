@@ -1,6 +1,6 @@
 import pygame
 import snd.constant as CONST
-from snd.core import G2048
+from snd.core import G2048,logger
 
 class Game:
     """Game class"""
@@ -20,7 +20,7 @@ class Game:
 
     def keyup(self,event:pygame.event.Event) -> None:
         """Handle key up event"""
-        if event.key in [pygame.K_UP,pygame.K_DOWN,pygame.K_LEFT,pygame.K_RIGHT]:
+        if event.key in [pygame.K_UP,pygame.K_DOWN,pygame.K_LEFT,pygame.K_RIGHT]:  
             match event.key:
                 case pygame.K_UP:
                     self.game.move((0,-1))
@@ -42,22 +42,18 @@ class Game:
         """Handle mouse up event"""
         right = event.pos[0]-self.mouse[0]
         down = event.pos[1]-self.mouse[1]
-        print(right,down)
+        logger.info(f"MOUSE MOVE : RIGTH = {right},DOWN = {down}")
         if abs(right)>abs(down):
             if right>CONST.MOVE_THRESHOLD:
-                print("right")
                 self.game.move((1,0))
             elif right<-CONST.MOVE_THRESHOLD:
-                print("left")
                 self.game.move((-1,0))
             else:
                 return
         elif abs(right)<abs(down):
             if down>CONST.MOVE_THRESHOLD:
-                print("down")
                 self.game.move((0,1))
             elif down<-CONST.MOVE_THRESHOLD:
-                print("up")
                 self.game.move((0,-1))
             else:
                 return
