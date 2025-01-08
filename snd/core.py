@@ -5,11 +5,10 @@ class G2048:
     RIGHT = int
     DOWN = int
     """2048 game class"""
-    def __init__(self,width:int=4,height:int=4,is_print:bool=False) -> None:
+    def __init__(self,width:int=4,height:int=4) -> None:
         """Initialize the game"""
         self.width = width
         self.height = height
-        self.is_print = is_print
         self.set : list[list[int]] = [[0 for _ in range(width)] for _ in range(height)]
         self.random_num()
         """### Game board
@@ -33,12 +32,21 @@ class G2048:
             logger.info(f"G2048 : RANDOM NUMBER GENERATED AT ({i},{j}) ,RANDOM NUMBER IS {self.set[i][j]}")
             return True
         else:
+            logger.error("G2048 : NO EMPTY SPACE FOR RANDOM NUMBER")
             return False
 
     def check(self) -> bool:
         """Check game is stop"""
-        ret = not all(all(self.set[i]) for i in range(self.height))
-        return ret
+        for i in range(self.height):
+            for j in range(self.width):
+                if self.set[i][j] == 0:
+                    return True
+                if i>0 and self.set[i][j] == self.set[i-1][j]:
+                    return True
+                if j>0 and self.set[i][j] == self.set[i][j-1]:
+                    return True
+        logger.info("G2048 : GAME OVER")
+        return False
 
     def print(self) -> None:
         """Print the game board"""
@@ -60,8 +68,7 @@ class G2048:
             logger.info("G2048 : MOVE NOT UP")
             return False
         self.random_num()
-        if self.is_print:
-            self.print()
+        self.print()
         if all(all(self.set[i]) for i in range(self.height)):
             self.run = False
         return True

@@ -4,15 +4,23 @@ from snd.core import G2048,logger
 
 class Game:
     """Game class"""
-    def __init__(self,width:int=4,height:int=4,is_print:bool=False) -> None:
+
+    def __new__(cls,width:int=4,height:int=4):
+        logger.info("{:=^60}".format("GAME INITIALIZING"))
+        return super().__new__(cls)
+
+    def __init__(self,width:int=4,height:int=4) -> None:
         """Initialize the game"""
         self.run = True
         self.width = width
         self.height = height
-        self.is_print = is_print
-        self.game = G2048(width,height,is_print)
+        self.game = G2048(width,height)
         self.key :dict[int,bool]={}
         self.mouse :tuple[int,int] = (0,0)
+
+    def __del__(self) -> None:
+        """Delete the game"""
+        logger.info("{:=^60}".format("GAME OVER"))
 
     def keydown(self,event:pygame.event.Event) -> None:
         """Handle key down event"""
@@ -32,6 +40,7 @@ class Game:
                     self.game.move((1,0))
                 case _:
                     pass
+            self.run = self.game.check()
         self.key[event.key] = False
 
     def mouse_down(self,event:pygame.event.Event) -> None:
