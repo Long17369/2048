@@ -7,12 +7,13 @@ def main():
     pygame.init()
     pygame.display.set_caption(CONST.WINDOWS_TITLE)
     screen = pygame.display.set_mode(CONST.WINDOWS_SIZE)
+    screen.fill(CONST.COLOR.White)
     clock = pygame.time.Clock()
 
     # Game loop
-    game = Game()
+    game = Game(screen)
 
-    while(True):
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 del game
@@ -28,10 +29,11 @@ def main():
                 game.mouse_up(event)
         if game.run == False:
             del game
-            game = Game()
+            game = Game(screen)
         game.update()
         pygame.display.flip()
         clock.tick(60)
+
 
 if __name__ == "__main__":
     main()
