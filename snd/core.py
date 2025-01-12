@@ -80,7 +80,7 @@ class G2048:
         for i in range(self.height):
             k = [n for n in self.set[i] if n!=0]
             for j in range(len(k)-1):
-                if k[j] == k[j+1]:
+                if k[j] != 0 and k[j] == k[j+1]:
                     k[j] += 1
                     k[j+1] = 0
             k = [n for n in k if n!=0]
@@ -97,7 +97,7 @@ class G2048:
         for i in range(self.height):
             k = [n for n in self.set[i] if n!=0]
             for j in range(len(k)-1,0,-1):
-                if k[j] == k[j-1]:
+                if k[j] != 0 and k[j] == k[j-1]:
                     k[j] += 1
                     k[j-1] = 0
             k = [n for n in k if n!=0]
@@ -114,7 +114,7 @@ class G2048:
         for j in range(self.width):
             k = [n[j] for n in self.set if n[j] != 0]
             for i in range(len(k)-1):
-                if k[i] == k[i+1]:
+                if k[i] != 0 and k[i] == k[i+1]:
                     k[i] += 1
                     k[i+1] = 0
             k = [n for n in k if n!=0]
@@ -134,7 +134,7 @@ class G2048:
             k = [n[j] for n in self.set if n[j] != 0]
             k = [0]*(self.height-len(k)) + k
             for i in range(len(k)-1,0,-1):
-                if k[i] == k[i-1]:
+                if k[i] != 0 and k[i] == k[i-1]:
                     k[i] += 1
                     k[i-1] = 0
             k = [n for n in k if n!=0]
