@@ -17,6 +17,7 @@ class Game:
         if screen is None:
             screen = pygame.Surface((width_count,height_count))
         self.screen = screen
+        self.is_flash = False
         self.run = True
         self.width = width_count
         self.height = height_count
@@ -35,6 +36,7 @@ class Game:
     def keyup(self,event:pygame.event.Event) -> None:
         """Handle key up event"""
         if event.key in [pygame.K_UP,pygame.K_DOWN,pygame.K_LEFT,pygame.K_RIGHT]:
+            self.is_flash = True
             match event.key:
                 case pygame.K_UP:
                     self.game.move((0,-1))
@@ -45,6 +47,7 @@ class Game:
                 case pygame.K_RIGHT:
                     self.game.move((1,0))
                 case _:
+                    self.is_flash = False
                     pass
             self.run = self.game.check()
         self.key[event.key] = False
@@ -74,6 +77,7 @@ class Game:
                 return
         else:
             return
+        self.is_flash = True
 
     def update(self) -> None:
         """Update the game"""
@@ -83,6 +87,11 @@ class Game:
                 print(k)
                 self.key.pop(k)
 
+        if self.is_flash:
+            self.flash()
+            self.is_flash = False
+
+    def flash(self) -> None:
         self.draw.set_update(self.game.set)
         suface = self.draw.flash()
         suface_rect = suface.get_rect()
