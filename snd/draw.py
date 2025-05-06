@@ -35,6 +35,7 @@ class Cell(pygame.sprite.Sprite):
     def __init__(self, rect: tuple[LEFT, TOP, WIDTH, HEIGHT]) -> None:
         super().__init__()
         self.rect = pygame.Rect(rect)
+        self.center = (int(rect[2] / 2), int(rect[3] / 2))
         self.size = self.rect.size
         self.image = pygame.Surface(self.size)
         self.font = pygame.font.Font(None, 36)
@@ -48,6 +49,6 @@ class Cell(pygame.sprite.Sprite):
         if self.value != 0:
             self.text = self.font.render(str(1 << self.value), True, (0, 0, 0))
             self.text_rect = self.text.get_rect()
-            self.text_rect.center = self.rect.center
+            self.text_rect.center = self.center
             self.image.blit(self.text, self.text_rect)
         return
