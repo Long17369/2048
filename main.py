@@ -27,11 +27,11 @@ def main():
                 game.mouse_down(event)
             if event.type == pygame.MOUSEBUTTONUP:
                 game.mouse_up(event)
+        game.update()
+        pygame.display.flip()
         if game.run == False:
             del game
             game = Game(screen)
-        game.update()
-        pygame.display.flip()
         clock.tick(60)
 
 
