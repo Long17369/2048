@@ -8,7 +8,7 @@ class Draw:
     ) -> None:
         cell_size = (size[0]/width_count,size[1]/height_count)
         self.screen = screen
-        self.suface = pygame.Surface(size)
+        self.surface = pygame.Surface(size)
         self.set = [
             [Cell((i*cell_size[0], j*cell_size[1], cell_size[0], cell_size[1])) for i in range(width_count)]
             for j in range(height_count)
@@ -18,8 +18,8 @@ class Draw:
     def flash(self) -> pygame.Surface:
         for i in self.set:
             for j in i:
-                self.suface.blit(j.image, j.rect)
-        return self.suface
+                self.surface.blit(j.image, j.rect)
+        return self.surface
 
     def set_update(self, set: list[list[int]]) -> None:
         for y in range(len(self.set)):
