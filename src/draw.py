@@ -1,5 +1,5 @@
 import pygame
-import snd.constant as CONST
+import src.constant as CONST
 
 
 class Draw:

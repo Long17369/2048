@@ -1,7 +1,7 @@
 import pygame
-import snd.constant as CONST
-from snd.core import G2048,logger
-from snd.draw import Draw
+import src.constant as CONST
+from src.core import G2048,logger
+from src.draw import Draw
 
 class Game:
     """Game class"""

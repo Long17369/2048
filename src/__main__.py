@@ -1,4 +1,4 @@
-from snd import *
+from src import *
 
 
 if not (CONST and Game):

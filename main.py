@@ -1,5 +1,5 @@
 import pygame
-from snd import *
+from src import *
 
 
 def main():
