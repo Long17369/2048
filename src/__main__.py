@@ -2,6 +2,6 @@ from src import *
 
 
 if not (CONST and Game):
-    raise Exception("snd not imported")
+    raise Exception("src not imported")
 else:
     game = Game()
