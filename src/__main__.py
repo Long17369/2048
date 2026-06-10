@@ -1,4 +1,4 @@
-from src import *
+from src import CONST, Game
 
 
 if not (CONST and Game):

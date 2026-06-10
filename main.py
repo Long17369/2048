@@ -1,5 +1,5 @@
 import pygame
-from src import *
+from src import CONST, Game
 
 
 def main():
@@ -29,7 +29,7 @@ def main():
                 game.mouse_up(event)
         game.update()
         pygame.display.flip()
-        if game.run == False:
+        if not game.run:
             del game
             game = Game(screen)
         clock.tick(60)

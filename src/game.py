@@ -12,7 +12,7 @@ class Game:
 
     def __init__(self,screen:pygame.Surface|None=None,width_count:int=4,height_count:int=4) -> None:
         """Initialize the game"""
-        if not screen is None:
+        if screen is not None:
             self.draw = Draw(screen,width_count,height_count,(CONST.WINDOWS_SIZE[0],CONST.WINDOWS_SIZE[1]-100))
         if screen is None:
             screen = pygame.Surface((width_count,height_count))
@@ -83,7 +83,7 @@ class Game:
         """Update the game"""
         a = [(k,v) for k,v in self.key.items()]
         for k,v in a:
-            if v==False:
+            if not v:
                 print(k)
                 self.key.pop(k)
 
